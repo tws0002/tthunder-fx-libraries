@@ -1,0 +1,23 @@
+import hou
+hou.appendSessionModuleSource('''hou.hscript("autosave on")''')
+
+
+# 从文件路径($HIPFILE)后面开始搜，直到带"houdini"就设置此路径为工程路径($JOB)
+# Linux、Mac 本地和网络都没测试过
+# 复制到 %HOMEPATH%\Documents\houdini17.0\scripts\456.py
+def set_project_path():
+    file_path = hou.hipFile.path()
+    file_path = file_path.split('/')
+    
+    for i in range(len(file_path)):
+        if 'houdini' in file_path[-1].lower():
+            break
+        file_path.pop()
+        
+    project_path = '/'.join(file_path)
+    
+    hou.putenv('JOB',project_path)
+    #hou.hscript("setenv JOB = JOBs")
+
+set_project_path()
+print('$'+'JOB = ' + hou.getenv('JOB','None'))

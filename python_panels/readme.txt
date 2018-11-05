@@ -1,0 +1,2 @@
+在C:\Users\tthunder\Documents\houdini17.0目录中应该有一个python panels
+使用此文件夹中的default.pypanel覆盖原有

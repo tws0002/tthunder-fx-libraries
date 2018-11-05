@@ -1,0 +1,48 @@
+loadPlugin AbcExport;
+
+//for abc export command, we have to get someting necessary
+string $abcExportCommand = "-frameRange ";
+
+//frame range
+int $beginFrame = `playbackOptions -q -ast`;
+int $endFrame = `playbackOptions -q -aet`;
+$abcExportCommand = $abcExportCommand + $beginFrame + " " + $endFrame + " -uvWrite -worldSpace -writeVisibility -dataFormat ogawa ";
+
+//things to export
+string $exportObjects[] = `ls -sl -long`;
+stringArrayInsertAtIndex(0,$exportObjects,"|camera1");
+for($i=0 ; $i<`size $exportObjects`; ++$i)
+{
+    $abcExportCommand = $abcExportCommand + "-root " + $exportObjects[$i] + " ";
+}
+
+
+//get current file name(short name with out ext)
+string $nameBuffer[];
+string $filename = `file -q -sceneName -shn`;
+tokenize $filename "." $nameBuffer;
+$filename = $nameBuffer[0];
+
+//get current file path
+string $currentScene;
+string $currentPath;
+string $pyCommand;
+$currentScene = `file -q -sceneName`;
+$pyCommand = "os.path.dirname(\"" + $currentScene + "\")";
+python( "import os");
+$currentPath = python( $pyCommand );
+
+//count out version
+int $version=1;
+for($i=1; $i<99 ; ++$i){
+    if(`file -query -exists ($currentPath+"/"+$filename+"_out"+$i + "_frm" + $endFrame +".abc")`){}
+    else{$version=$i; $i=99;}
+}
+$abcExportCommand = $abcExportCommand + "-file " + $currentPath + "/" + $filename + "_out" + $version + "_frm" + $endFrame + ".abc";
+
+//finaly, we execute the export commond
+AbcExport -j $abcExportCommand;
+
+//report file location
+print ("/////exported to/////:"+$currentPath + "/" + $filename + "_out" + $version + "_frm" + $endFrame + ".abc");
+

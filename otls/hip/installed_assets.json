@@ -1,0 +1,35 @@
+{
+    "organization": {
+        "guid": "0xE1372C11-0x9EC711E8-0xB295A45E-0x60D77276", 
+        "type": "folder", 
+        "name": "", 
+        "entries": [
+            {
+                "guid": "0xEA1F7211-0x9EC711E8-0x96D9A45E-0x60D77276", 
+                "type": "folder", 
+                "name": "Tool", 
+                "entries": [
+                    {
+                        "rating": 5.0, 
+                        "update_available": false, 
+                        "descriptive_name": "Select Edge Ring", 
+                        "description": "Procedurally selects edge rings given an edge group.", 
+                        "created_utc_timestamp": 1425136934, 
+                        "node_type_name": "animatrix::selectEdgeRing::1.00", 
+                        "guid": "0xEA1F7212-0x9EC711E8-0xAEDCA45E-0x60D77276", 
+                        "icon": "animatrix__selectEdgeRing__1.00.png", 
+                        "otl_file": "animatrix__selectEdgeRing__1.00.otl", 
+                        "version_sequence_number": 6, 
+                        "max_rating": 5, 
+                        "default_folder": "Tool", 
+                        "creator": "animatrix", 
+                        "num_votes": 2, 
+                        "otl_dependents": [], 
+                        "type": "asset"
+                    }
+                ]
+            }
+        ]
+    }, 
+    "version": 1
+}
